@@ -1,0 +1,12 @@
+[package]
+name = "yt-bevy-blender"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bevy = "0.12.1"
+bevy_asset_loader = { version = "0.19.1", features = ["3d"] }
+bevy_gltf_components = "0.3.0"
+bevy_registry_export = "0.1.0"
