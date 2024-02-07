@@ -1,4 +1,4 @@
-use bevy::{gltf::Gltf, prelude::*};
+use bevy::prelude::*;
 use bevy_asset_loader::prelude::*;
 use bevy_gltf_components::ComponentsFromGltfPlugin;
 use bevy_registry_export::*;
@@ -38,13 +38,12 @@ fn rotate_coins(
 #[derive(AssetCollection, Resource)]
 struct LevelAssets {
     #[asset(path = "level.glb")]
-    level: Handle<Gltf>,
+    level: Handle<Scene>,
 }
 
 fn start_level(
     mut commands: Commands,
     assets: Res<LevelAssets>,
-    models: Res<Assets<bevy::gltf::Gltf>>,
 ) {
     commands.spawn(PointLightBundle {
         point_light: PointLight {
@@ -60,11 +59,10 @@ fn start_level(
             .looking_at(Vec3::ZERO, Vec3::Y),
         ..default()
     });
-    let my_gltf = models.get(assets.level.clone()).unwrap();
 
     commands.spawn((
         SceneBundle {
-            scene: my_gltf.scenes[0].clone(),
+            scene: assets.level.clone(),
             ..default()
         },
         Name::new("Level1"),
